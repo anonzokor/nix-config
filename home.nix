@@ -1,8 +1,10 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, nvchad4nix, slippi, ... }:
 
 {
   imports = [
-    inputs.nvchad4nix.homeManagerModule
+    nvchad4nix.homeManagerModule
+    slippi.homeManagerModules.default
+
   ];
 
   programs.nvchad = {
@@ -19,8 +21,16 @@
       ]))
     ];
     hm-activation = true;
-    backup = true;
+    backup = false;
   };
+
+  slippi-launcher = {
+    isoPath = "/home/q/ssbm_iso/SSBMv102.iso";
+    launchMeleeOnPlay = false;
+#     useBetaNetplay = true;
+  };
+
+
 
 
   home.username = "q";
@@ -45,11 +55,6 @@
 #       xxx
 #   '';
 #
-#   set cursor size and dpi for 4k monitor
-#   xresources.properties = {
-#    "Xcursor.size" = 16;
-#    "Xft.dpi" = 172;
-#   };
 
   # i3
 #   xsession.windowManager.i3 = {
@@ -64,15 +69,8 @@
 #     };
 #   };
 
-
-
-  
-
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    # here is some command line tools I use frequently
-    # feel free to add your own or remove some of them
-    
     brave
     discord
     flameshot
@@ -89,6 +87,8 @@
     rofi
     nerdfonts
     libreoffice-qt6-fresh
+    joplin-desktop
+    super-productivity
 
     # package for bluetooth on kde
     bluez
